@@ -9,8 +9,9 @@ import wrangle
 import env
 import seaborn as sns
 
+
 url = env.get_db_url('iris_db')
-#
+
 def wrangle_iris():
     df = pd.read_sql("""
 
@@ -19,15 +20,7 @@ FROM measurements m
 JOIN species s on s.species_id = m.species_id;
 """
 ,url)
-    print(df.head(3))
-    
-    print(df.shape)
-    
-    print(df.columns)
-    
-    print(df.dtypes)
-    
-    print(df.describe())
+
     return df
 
 
@@ -54,13 +47,14 @@ def google_sheet():
     return df_google, unique_categories
 
 
-url = env.get_db_url('titanic_db')
+url2 = env.get_db_url('titanic_db')
 
 def wrangle_titanic():
+    
     df = pd.read_sql("""
 
 SELECT *
 FROM passengers
 """
-,url)
+,url2)
     return df
