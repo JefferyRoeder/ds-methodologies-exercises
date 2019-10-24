@@ -6,10 +6,10 @@ import statsmodels.api as sm
 from statsmodels.formula.api import ols
 import split_scale
 
-def split_my_data(data, train_ratio=.80, seed=123):
+def split_my_data(data, train_ratio=.80, seed=123,stratify=None):
     '''the function will take a dataframe and returns train and test dataframe split 
     where 80% is in train, and 20% in test. '''
-    return train_test_split(data, train_size = train_ratio, random_state = seed)
+    return train_test_split(data, train_size = train_ratio, random_state = seed,stratify=stratify)
 
 ## Types of scalers
 
