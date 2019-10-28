@@ -65,3 +65,21 @@ JOIN species s on s.species_id = m.species_id;
 
 
     return df
+
+def prep_iris_no_encode():
+    df = pd.read_sql("""
+
+SELECT *
+FROM measurements m
+JOIN species s on s.species_id = m.species_id;
+"""
+
+,url)
+    df.drop(['species_id','measurement_id'],axis=1,inplace=True)
+    df.rename(columns={'species_name':'species'},inplace=True)
+    #int_encoder = LabelEncoder()
+    #int_encoder.fit(df.species)
+    #df.species = int_encoder.transform(df.species)
+
+
+    return df
