@@ -22,7 +22,7 @@ url = env.get_db_url('zillow')
 def drop_columns(df):
     df_nulls_c = pd.DataFrame(df.apply(lambda x: len(x) - x.count(),axis=0))
     df_nulls_c['pct_rows_missing'] = df_nulls_c[0] / len(df)
-    column_drops = df_nulls_c[df_nulls_c['pct_rows_missing'] >.1]
+    column_drops = df_nulls_c[df_nulls_c['pct_rows_missing'] >.2]
     column_drops['column_names'] = column_drops.index
     column_drops = list(column_drops.column_names)
     df_new = df.drop(column_drops,axis=1)
