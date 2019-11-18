@@ -21,3 +21,9 @@ def sales_by_day(df):
     sales_by_day = df.resample('D')[['sales_total']].sum()
     sales_by_day['diff_with_last_day'] = sales_by_day.sales_total.diff()
     return sales_by_day
+
+
+def split_store_data(df, train_prop=.66): 
+    train_size = int(len(df) * train_prop)
+    train, test = df[0:train_size].reset_index(), df[train_size:len(df)].reset_index()
+    return train, test
