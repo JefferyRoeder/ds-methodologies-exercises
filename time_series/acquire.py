@@ -58,3 +58,19 @@ def get_items():
             response = requests.get(base_url + page)
         items += data
     return pd.DataFrame(items)
+
+
+
+def merge_drop_columns(df):
+    df = sales.merge(stores,left_on='store',right_on='store_id',how='left')
+    df = df.merge(items,left_on='item',right_on='item_id',how='left')
+    df.drop(columns=['store_id','item_id'],inplace=True)
+    return df
+
+
+def get_opsd_data(use_cache=True):
+    if use_cache and path.exists('opsd.csv'):
+        return pd.read_csv('opsd.csv')
+    df = pd.read_csv('https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv')
+    df.to_csv('opsd.csv',index=False)
+    return df
